@@ -1,4 +1,3 @@
-yaml
 name: Save GitHub Traffic Data Daily
 
 on:
