@@ -166,100 +166,6 @@ footer{border-top:1px solid var(--border);padding:20px 0 10px;display:flex;justi
 </style>
 </head>
 <body>
-
-<div id="admin-bar">
-  <span><i class="ti ti-shield-lock"></i> Kindstride Admin</span>
-  <div style="display:flex;gap:8px;">
-    <a onclick="toggleAdmin()"><i class="ti ti-settings"></i> <span data-key="adm_edit">Edit Site</span></a>
-    <a onclick="exportData()"><i class="ti ti-download"></i> <span data-key="adm_export">Export Data</span></a>
-  </div>
-</div>
-
-<div id="admin-panel">
-  <div class="site-wrap">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <h2 style="font-family:'Lora',serif;font-size:22px;font-weight:600;" data-key="adm_title">Site Editor</h2>
-      <button class="btn-sm" onclick="toggleAdmin()"><i class="ti ti-x"></i> <span data-key="adm_close">Close</span></button>
-    </div>
-    <div class="admin-tabs">
-      <button class="admin-tab on" onclick="showAdminTab('hero',this)" data-key="adm_tab_hero">Hero Text</button>
-      <button class="admin-tab" onclick="showAdminTab('cats',this)" data-key="adm_tab_cats">Cats</button>
-      <button class="admin-tab" onclick="showAdminTab('dogs',this)" data-key="adm_tab_dogs">Dogs</button>
-      <button class="admin-tab" onclick="showAdminTab('birds',this)" data-key="adm_tab_birds">Birds</button>
-      <button class="admin-tab" onclick="showAdminTab('rodents',this)" data-key="adm_tab_rodents">Rodents</button>
-      <button class="admin-tab" onclick="showAdminTab('rescue',this)" data-key="adm_tab_rescue">Rescue Steps</button>
-    </div>
-    <div id="atab-hero" class="admin-panel-section on">
-      <div class="admin-section">
-        <h3><i class="ti ti-pencil" style="color:var(--green-mid)"></i> <span data-key="adm_hero_h">Hero &amp; homepage text</span></h3>
-        <div class="admin-grid">
-          <div class="admin-field"><label data-key="adm_tag_en">Tagline (English)</label><input id="ed-tagline-en" type="text"/></div>
-          <div class="admin-field"><label data-key="adm_tag_uz">Tagline (Uzbek)</label><input id="ed-tagline-uz" type="text"/></div>
-          <div class="admin-field"><label data-key="adm_tag_ru">Tagline (Russian)</label><input id="ed-tagline-ru" type="text"/></div>
-          <div class="admin-field"><label data-key="adm_sub_en">Sub-headline (English)</label><textarea id="ed-sub-en"></textarea></div>
-          <div class="admin-field"><label data-key="adm_sub_uz">Sub-headline (Uzbek)</label><textarea id="ed-sub-uz"></textarea></div>
-          <div class="admin-field"><label data-key="adm_sub_ru">Sub-headline (Russian)</label><textarea id="ed-sub-ru"></textarea></div>
-        </div>
-        <button class="btn-sm primary" onclick="saveHeroText()"><i class="ti ti-check"></i> <span data-key="adm_save_hero">Save hero text</span></button>
-      </div>
-    </div>
-    <div id="atab-cats" class="admin-panel-section">
-      <div class="admin-section">
-        <h3><i class="ti ti-cat" style="color:var(--green-mid)"></i> <span data-key="adm_cats_h">Cat breeds</span></h3>
-        <div id="admin-cats-list" class="breed-admin-list"></div>
-        <button class="btn-sm primary" onclick="openBreedModal('cats',null)"><i class="ti ti-plus"></i> <span data-key="adm_add_cat">Add new cat breed</span></button>
-      </div>
-    </div>
-    <div id="atab-dogs" class="admin-panel-section">
-      <div class="admin-section">
-        <h3><i class="ti ti-dog" style="color:var(--green-mid)"></i> <span data-key="adm_dogs_h">Dog breeds</span></h3>
-        <div id="admin-dogs-list" class="breed-admin-list"></div>
-        <button class="btn-sm primary" onclick="openBreedModal('dogs',null)"><i class="ti ti-plus"></i> <span data-key="adm_add_dog">Add new dog breed</span></button>
-      </div>
-    </div>
-    <div id="atab-birds" class="admin-panel-section">
-      <div class="admin-section">
-        <h3><i class="ti ti-feather" style="color:var(--amber-dark)"></i> <span data-key="adm_birds_h">Bird species</span></h3>
-        <div id="admin-birds-list" class="breed-admin-list"></div>
-        <button class="btn-sm primary" onclick="openBreedModal('birds',null)"><i class="ti ti-plus"></i> <span data-key="adm_add_bird">Add new bird species</span></button>
-      </div>
-    </div>
-    <div id="atab-rodents" class="admin-panel-section">
-      <div class="admin-section">
-        <h3><i class="ti ti-mouse" style="color:var(--amber-dark)"></i> <span data-key="adm_rodents_h">Rodent species</span></h3>
-        <div id="admin-rodents-list" class="breed-admin-list"></div>
-        <button class="btn-sm primary" onclick="openBreedModal('rodents',null)"><i class="ti ti-plus"></i> <span data-key="adm_add_rodent">Add new rodent species</span></button>
-      </div>
-    </div>
-    <div id="atab-rescue" class="admin-panel-section">
-      <div class="admin-section">
-        <h3><i class="ti ti-map-pin" style="color:var(--green-mid)"></i> <span data-key="adm_rescue_h">Rescue steps</span></h3>
-        <div id="admin-rescue-list"></div>
-        <button class="btn-sm primary" onclick="addRescueStep()"><i class="ti ti-plus"></i> <span data-key="adm_add_step">Add step</span></button>
-        <button class="btn-sm primary" style="margin-left:8px;" onclick="saveRescueSteps()"><i class="ti ti-check"></i> <span data-key="adm_save_steps">Save steps</span></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="breed-modal">
-  <div class="modal">
-    <h3 id="modal-title" data-key="modal_add">Add breed</h3>
-    <div class="admin-field"><label data-key="modal_name">Name</label><input id="m-name" type="text"/></div>
-    <div class="admin-field"><label data-key="modal_emoji">Emoji</label><input id="m-emoji" type="text" placeholder="🐱" style="max-width:80px;"/></div>
-    <div class="admin-field"><label data-key="modal_trait">Trait</label><input id="m-trait" type="text"/></div>
-    <div class="admin-field"><label data-key="modal_tag">Tag</label><input id="m-tag" type="text"/></div>
-    <p id="modal-hint" style="font-size:12px;color:var(--text2);margin:10px 0 6px;" data-key="modal_hint">Care rows — write as: Label | note (one per line). Add a number 1-5 for level dots: Label | 3 | note</p>
-    <div class="admin-field"><label data-key="modal_rows">Care rows</label><textarea id="m-rows" style="min-height:140px;font-family:monospace;font-size:12.5px;"></textarea></div>
-    <div class="modal-btns">
-      <button class="btn-sm" onclick="closeBreedModal()" data-key="modal_cancel">Cancel</button>
-      <button class="btn-sm primary" onclick="saveBreed()"><i class="ti ti-check"></i> <span data-key="modal_save">Save breed</span></button>
-    </div>
-  </div>
-</div>
-
-<div class="success-toast" id="toast"></div>
-
 <div class="site-wrap">
   <div class="lang-bar">
     <button class="lang-btn on" onclick="setLang('en',this)">EN</button>
@@ -789,8 +695,6 @@ ru:{
 
 // ═══════════════════ STATE ═══════════════════
 var currentLang = 'en';
-var editingBreedType = null;
-var editingBreedIndex = null;
 
 function loadData(){ var s=localStorage.getItem('kindstride_data'); if(s){try{SITE_DATA=JSON.parse(s);}catch(e){}} }
 function saveData(){ localStorage.setItem('kindstride_data',JSON.stringify(SITE_DATA)); }
@@ -801,9 +705,6 @@ function init(){
   renderRescueSteps();
   buildAllBreedGrids();
   updateBreedCount();
-  fillAdminHero();
-  ['cats','dogs','birds','rodents'].forEach(renderAdminBreedList);
-  renderAdminRescueSteps();
 }
 
 function setLang(lang, el){
